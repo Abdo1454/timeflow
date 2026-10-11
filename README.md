@@ -1,75 +1,101 @@
-# React + TypeScript + Vite
+# TimeFlow — Smart Time Management & Productivity
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern productivity web application designed to help users organize tasks, plan their week, build habits, and improve focus.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+TimeFlow aims to make daily planning easier through a clean dashboard, task management, weekly scheduling, and focus sessions.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Dashboard:** Get an overview of tasks and daily progress.
+- **Task Management:** Create, organize, prioritize, and track tasks.
+- **Weekly Planner:** Plan tasks across the week.
+- **Focus Timer:** Track focused work sessions.
+- **Habit Tracking:** Build consistent daily routines.
+- **Analytics:** Review productivity using recorded activity.
 
-## Expanding the ESLint configuration
+*Features are being implemented incrementally. Items listed here represent the project roadmap and may not all be available yet.*
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- React Router
+- Lucide React
+- ESLint
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
 
+- Node.js (LTS recommended)
+- npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/timeflow.git
+cd timeflow
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL printed in your terminal.
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check and build for production |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview the production build |
+
+## Project Structure
+
+```text
+src/
+├── app/
+├── assets/
+├── components/
+├── features/
+│   ├── dashboard/
+│   ├── planner/
+│   └── tasks/
+├── hooks/
+├── layouts/
+├── lib/
+├── store/
+├── styles/
+├── types/
+└── utils/
+```
+
+## Project Status
+
+🚧 Under active development.
+
+## Author
+
+**Abdulrhim Elsayed**
+
+Frontend Developer | React | TypeScript
+
+## License
+
+No license has been selected yet.
