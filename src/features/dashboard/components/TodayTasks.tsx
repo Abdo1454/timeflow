@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Check, Clock3, Plus } from "lucide-react";
 import Button from "../../../components/ui/Button";
+import AddTaskModal, {
+  type NewTask,
+} from "./AddTaskModal";
 type Task = {
   id: number;
   title: string;
@@ -46,7 +49,8 @@ const priorityStyles = {
 };
 
 export default function TodayTask() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
   function toggleTask(id: number) {
     setTasks((currentTasks) =>
       currentTasks.map((task) =>
@@ -54,7 +58,25 @@ export default function TodayTask() {
       ),
     );
   }
+function handleAddTask(newTask: NewTask) {
+  const formattedTime = new Date(
+    `2000-01-01T${newTask.time}:00`,
+  ).toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
+  setTasks((currentTasks) => [
+    ...currentTasks,
+    {
+      id: Date.now(),
+      title: newTask.title,
+      time: formattedTime,
+      priority: newTask.priority,
+      completed: false,
+    },
+  ]);
+}
   const completedCount = tasks.filter((task) => task.completed).length;
 
   return (
@@ -68,13 +90,13 @@ export default function TodayTask() {
           </p>
         </div>
 
-        <Button
-          type="button"
-          leftIcon={<Plus size={16} />}
-          onClick={() => window.alert("Add Task")}
-        >
-          Add Task
-        </Button>
+       <Button
+  type="button"
+  leftIcon={<Plus size={16} />}
+  onClick={() => setIsModalOpen(true)}
+>
+  Add Task
+</Button>
       </div>
 
       <div className="mt-5 h-2 overflow-hidden rounded-full bg-gray-100">
@@ -134,6 +156,11 @@ export default function TodayTask() {
           </div>
         ))}
       </div>
+      <AddTaskModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  onAddTask={handleAddTask}
+/>
     </section>
   );
 }
