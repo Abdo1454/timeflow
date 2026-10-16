@@ -1,6 +1,6 @@
 import Header from "./Header";
 import DashboardPage from "../features/dashboard/pages/DashboardPage";
-import TodayTask from "../features/dashboard/components/TodayTasks";
+// import TodayTask from "../features/dashboard/components/TodayTasks";
 
 export default function DashboardLayout() {
   return (
@@ -9,7 +9,7 @@ export default function DashboardLayout() {
 
       <main className="p-6">
         {<DashboardPage />}
-        {<TodayTask />}
+       
       </main>
     </div>
   );
