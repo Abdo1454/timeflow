@@ -1,5 +1,7 @@
+import Sidebar from "../layouts/Sidebar";
+
 function App() {
-  return <h1>Time Management</h1>;
+  return <Sidebar />
 }
 
 export default App;
