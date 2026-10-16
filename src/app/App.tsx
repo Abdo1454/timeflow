@@ -4,9 +4,9 @@ import Sidebar from "../layouts/Sidebar";
 
 function App() {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 md:flex">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0">
+      <aside className="hidden w-64 shrink-0 md:block">
         <Sidebar />
       </aside>
 
