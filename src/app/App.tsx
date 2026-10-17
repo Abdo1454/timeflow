@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 md:flex">
       {/* Sidebar */}
-      <aside className="hidden w-64 shrink-0 md:block">
+      <aside className="hidden w-64 shrink-0 md:block position-fixed">
         <Sidebar />
       </aside>
 
