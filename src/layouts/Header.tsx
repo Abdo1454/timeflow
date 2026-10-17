@@ -4,16 +4,19 @@ import Button from "../components/ui/Button";
 
 type HeaderProps = {
   onAddTaskClick: () => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
 };
 
-export default function Header({ onAddTaskClick }: HeaderProps) {
+export default function Header({
+  onAddTaskClick,
+  searchQuery,
+  onSearchChange,
+}: HeaderProps) {
   return (
     <header className="flex items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 py-4">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
-          Dashboard
-        </h1>
-
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <p className="mt-1 text-sm text-gray-500">
           Welcome back! Here's your productivity overview.
         </p>
@@ -22,9 +25,10 @@ export default function Header({ onAddTaskClick }: HeaderProps) {
       <div className="flex items-center gap-3">
         <div className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 sm:flex">
           <Search size={18} className="text-gray-400" />
-
           <input
             type="search"
+            value={searchQuery}
+            onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Search tasks..."
             aria-label="Search tasks"
             className="w-36 bg-transparent text-sm outline-none placeholder:text-gray-400"
