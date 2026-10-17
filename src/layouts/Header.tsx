@@ -1,41 +1,44 @@
 
 import { Search, Bell, Plus } from "lucide-react";
+import Button from "../components/ui/Button";
 
-export default function Header() {
+type HeaderProps = {
+  onAddTaskClick: () => void;
+};
+
+export default function Header({ onAddTaskClick }: HeaderProps) {
   return (
     <header className="flex items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 py-4">
-      {/* Page Title */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">
           Dashboard
         </h1>
+
         <p className="mt-1 text-sm text-gray-500">
           Welcome back! Here's your productivity overview.
         </p>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center gap-3">
-        {/* Search */}
         <div className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 sm:flex">
           <Search size={18} className="text-gray-400" />
+
           <input
             type="search"
             placeholder="Search tasks..."
+            aria-label="Search tasks"
             className="w-36 bg-transparent text-sm outline-none placeholder:text-gray-400"
           />
         </div>
 
-        {/* Add Task */}
-        <button
+        <Button
           type="button"
-          className="flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-indigo-700"
+          leftIcon={<Plus size={16} />}
+          onClick={onAddTaskClick}
         >
-          <Plus size={18} />
-          <span className="hidden sm:inline">Add Task</span>
-        </button>
+          Add Task
+        </Button>
 
-        {/* Notifications */}
         <button
           type="button"
           aria-label="Notifications"
@@ -45,7 +48,6 @@ export default function Header() {
           <span className="absolute right-2 top-2 size-2 rounded-full bg-red-500" />
         </button>
 
-        {/* User Avatar */}
         <div
           className="flex size-10 items-center justify-center rounded-full bg-indigo-100 font-semibold text-indigo-700"
           title="User profile"
