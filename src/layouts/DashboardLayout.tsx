@@ -1,30 +1,32 @@
 
-import { useState, type ComponentType, type Dispatch, type SetStateAction } from "react";
+import { useMemo, useState } from "react";
+
+import useTasks from "../features/dashboard/hooks/useTasks";
 import Header from "./Header";
 import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import AddTaskModal, {
   type NewTask,
 } from "../features/dashboard/components/AddTaskModal";
-import type { Task } from "../features/dashboard/data/data";
-import { initialTasks } from "../features/dashboard/data/data";
-
-type DashboardPageProps = {
-  tasks: Task[];
-  setTasks: Dispatch<SetStateAction<Task[]>>;
-  onAddTaskClick: () => void;
-};
-
-const DashboardPageWithTasks =
-  DashboardPage as unknown as ComponentType<DashboardPageProps>;
 
 export default function DashboardLayout() {
+  const { tasks, setTasks, deleteTask } = useTasks();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredTasks = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    if (!query) return tasks;
+
+    return tasks.filter((task) =>
+      task.title.toLowerCase().includes(query)
+    );
+  }, [tasks, searchQuery]);
 
   function handleAddTask(newTask: NewTask) {
     const formattedTime = new Date(
-      `2000-01-01T${newTask.time}:00`,
+      `2000-01-01T${newTask.time}:00`
     ).toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
@@ -43,9 +45,6 @@ export default function DashboardLayout() {
 
     setIsModalOpen(false);
   }
-  const filteredTasks = tasks.filter((task) =>
-  task.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
-);
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-gray-50">
@@ -58,11 +57,12 @@ export default function DashboardLayout() {
       </header>
 
       <main className="min-h-0 flex-1 overflow-y-auto p-6">
-      <DashboardPageWithTasks
-  tasks={filteredTasks}
-  setTasks={setTasks}
-  onAddTaskClick={() => setIsModalOpen(true)}
-/>
+        <DashboardPage
+          tasks={filteredTasks}
+          setTasks={setTasks}
+          onDeleteTask={deleteTask}
+          onAddTaskClick={() => setIsModalOpen(true)}
+        />
       </main>
 
       <AddTaskModal
