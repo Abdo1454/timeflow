@@ -20,6 +20,7 @@ const DashboardPageWithTasks =
 export default function DashboardLayout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [searchQuery, setSearchQuery] = useState("");
 
   function handleAddTask(newTask: NewTask) {
     const formattedTime = new Date(
@@ -42,19 +43,26 @@ export default function DashboardLayout() {
 
     setIsModalOpen(false);
   }
+  const filteredTasks = tasks.filter((task) =>
+  task.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
+);
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-gray-50">
       <header className="z-50 shrink-0">
-        <Header onAddTaskClick={() => setIsModalOpen(true)} />
+        <Header
+          onAddTaskClick={() => setIsModalOpen(true)}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+        />
       </header>
 
       <main className="min-h-0 flex-1 overflow-y-auto p-6">
-        <DashboardPageWithTasks
-          tasks={tasks}
-          setTasks={setTasks}
-          onAddTaskClick={() => setIsModalOpen(true)}
-        />
+      <DashboardPageWithTasks
+  tasks={filteredTasks}
+  setTasks={setTasks}
+  onAddTaskClick={() => setIsModalOpen(true)}
+/>
       </main>
 
       <AddTaskModal
