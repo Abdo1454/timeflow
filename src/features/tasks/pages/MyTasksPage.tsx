@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "../../../layouts/Sidebar";
 import Header from "../../../layouts/Header";
+// import TaskStats from "../components/TaskStats";
 // import TasksHeader from "../components/TasksHeader";
 
 export default function MyTasksPage() {
@@ -30,6 +31,7 @@ export default function MyTasksPage() {
                 </header>
 
     </div>
+     
     {/* <TasksHeader /> */}
     </div>
   )
