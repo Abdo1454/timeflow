@@ -1,6 +1,7 @@
 
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
+import MyTasksPage from "../features/tasks/pages/MyTasksPage";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+  },
+  {
+    path: "/tasks",
+    element: <MyTasksPage />,
   },
 ]);
 
