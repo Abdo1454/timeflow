@@ -11,17 +11,23 @@ import {
   Clock,
   Plus
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const side = [
-  { label: "Dashboard", icon: House },
-  { label: "My Tasks", icon: ListTodo },
-  { label: "Weekly Planner", icon: CalendarDays },
-  { label: "Focus Timer", icon: Timer },
-  { label: "Habits", icon: Heart },
-  { label: "Analytics", icon: ChartNoAxesColumn },
-  { label: "AI Planner", icon: Sparkles, badge: "NEW" },
-  { label: "Settings", icon: Settings },
-  { label: "Help", icon: CircleHelp },
+  { label: "Dashboard", icon: House, link: "/dashboard" },
+  { label: "My Tasks", icon: ListTodo, link: "/tasks" },
+  { label: "Weekly Planner", icon: CalendarDays, link: "/planner" },
+  { label: "Focus Timer", icon: Timer, link: "/focus" },
+  { label: "Habits", icon: Heart, link: "/habits" },
+  { label: "Analytics", icon: ChartNoAxesColumn, link: "/analytics" },
+  {
+    label: "AI Planner",
+    icon: Sparkles,
+    badge: "NEW",
+    link: "/ai-planner",
+  },
+  { label: "Settings", icon: Settings, link: "/settings" },
+  { label: "Help", icon: CircleHelp, link: "/help" },
 ];
 export default function Sidebar() {
   return (
@@ -44,11 +50,13 @@ export default function Sidebar() {
         <p>C</p>
       </div>
       <div className="flex flex-col gap-5 my-5 ">
+        
         {side.map((item) => {
           const Icon = item.icon;
 
           return (
-            <div key={item.label} className="flex gap-2">
+            <Link key={item.label} to={item.link}>
+            <div  className="flex gap-2">
               <Icon size={20} />
               <h3>{item.label}</h3>
               {item.badge && (
@@ -57,6 +65,7 @@ export default function Sidebar() {
                 </span>
               )}
             </div>
+        </Link>
           );
         })}
       </div>
