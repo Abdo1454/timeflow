@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 
 import useTasks from "../features/dashboard/hooks/useTasks";
 import Header from "./Header";
+import Sidebar from "./Sidebar";
+
 import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import AddTaskModal, {
   type NewTask,
@@ -47,24 +49,33 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-gray-50">
-      <header className="z-50 shrink-0">
-        <Header
-          onAddTaskClick={() => setIsModalOpen(true)}
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-        />
-      </header>
+    <div className="flex h-screen overflow-hidden bg-gray-50">
+      {/* Sidebar */}
+      <aside className="hidden w-64 shrink-0 overflow-y-auto border-r border-gray-200 bg-white md:block">
+        <Sidebar />
+      </aside>
 
-      <main className="min-h-0 flex-1 overflow-y-auto p-6">
-        <DashboardPage
-          tasks={filteredTasks}
-          setTasks={setTasks}
-          onDeleteTask={deleteTask}
-          onAddTaskClick={() => setIsModalOpen(true)}
-        />
-      </main>
+      {/* Main Content */}
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <header className="z-50 shrink-0">
+          <Header
+            onAddTaskClick={() => setIsModalOpen(true)}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+        </header>
 
+        <main className="min-h-0 flex-1 overflow-y-auto p-6">
+          <DashboardPage
+            tasks={filteredTasks}
+            setTasks={setTasks}
+            onDeleteTask={deleteTask}
+            onAddTaskClick={() => setIsModalOpen(true)}
+          />
+        </main>
+      </div>
+
+      {/* Add Task Modal */}
       <AddTaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
