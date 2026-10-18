@@ -9,6 +9,7 @@ import {
 
 import StatsCard from "../components/StatsCard";
 import ProductivityChart from "../components/ProductivityChart";
+import HabitsSection from "../components/HabitsSection";
 import TodayTask from "../components/TodayTasks";
 import type { Task } from "../data/data";
 
@@ -150,7 +151,15 @@ export default function DashboardPage({
       </div>
 
       {/* Productivity chart */}
-      <ProductivityChart />
+ <div className="flex w-full flex-col gap-6 xl:flex-row">
+  <div className="min-w-0 flex-1">
+    <ProductivityChart />
+  </div>
+
+  <div className="min-w-0 flex-1">
+    <HabitsSection />
+  </div>
+</div>
     </section>
   );
 }
